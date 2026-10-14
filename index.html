@@ -57,23 +57,23 @@
         <div class="wrap">
             <h2>Sport turlari</h2>
             <div class="cards-container">
-                <article class="sport">
-                    <img src="https://images.unsplash.com/photo-1680022702604-292f21514497?q=70&w=800&auto=format&fit=crop" alt="MMA katagi ichida turgan sportchilar" loading="lazy">
-                    <div class="sport-body">
+                <article class="sport" style="text-align: center; padding: 2.5rem 1.5rem;">
+                    <div style="font-size: 4.5rem; margin-bottom: 1rem;">🥋</div>
+                    <div class="sport-body" style="border-top: none; padding: 0; text-align: left;">
                         <h3>MMA</h3>
                         <p>Aralash jang san'ati: zarba berish, kurash va yerdagi jang texnikasi. Kuch, tezlik va intizomni birga rivojlantiradi.</p>
                     </div>
                 </article>
-                <article class="sport">
-                    <img src="https://images.unsplash.com/photo-1680022546558-550eaf22351e?q=70&w=800&auto=format&fit=crop" alt="Ringda turgan jangchilar" loading="lazy">
-                    <div class="sport-body">
+                <article class="sport" style="text-align: center; padding: 2.5rem 1.5rem;">
+                    <div style="font-size: 4.5rem; margin-bottom: 1rem;">🥊</div>
+                    <div class="sport-body" style="border-top: none; padding: 0; text-align: left;">
                         <h3>Kikboksing</h3>
                         <p>Qo'l va oyoq zarbalari, himoya va harakat texnikasi. Chidamlilik va reaksiya tezligini oshiradi.</p>
                     </div>
                 </article>
-                <article class="sport">
-                    <img src="https://images.unsplash.com/photo-1513352098199-8ccf457b35a8?q=70&w=800&auto=format&fit=crop" alt="Shtanga ko'tarayotgan erkak" loading="lazy">
-                    <div class="sport-body">
+                <article class="sport" style="text-align: center; padding: 2.5rem 1.5rem;">
+                    <div style="font-size: 4.5rem; margin-bottom: 1rem;">🏋️‍♂️</div>
+                    <div class="sport-body" style="border-top: none; padding: 0; text-align: left;">
                         <h3>Krossfit</h3>
                         <p>Kuch, kardio va gimnastika mashqlarini birlashtirgan yuqori intensivlikdagi mashg'ulot.</p>
                     </div>
@@ -205,10 +205,12 @@
                     <a href="tel:+998902953139" class="btn btn-secondary">Qo'ng'iroq qilish</a>
                 </div>
             </div>
-            <form class="contact-form">
-                <input type="text" name="name" placeholder="Ismingiz" aria-label="Ismingiz" autocomplete="name" required>
-                <input type="tel" name="phone" placeholder="Telefon raqamingiz" aria-label="Telefon raqamingiz" autocomplete="tel" required>
-                <button type="submit" class="btn btn-primary">Yuborish</button>
+            
+            <!-- Telegram Bot ulanadigan forma -->
+            <form class="contact-form" id="tgForm">
+                <input type="text" name="name" id="name" placeholder="Ismingiz" aria-label="Ismingiz" autocomplete="name" required>
+                <input type="tel" name="phone" id="phone" placeholder="Telefon raqamingiz" aria-label="Telefon raqamingiz" autocomplete="tel" required>
+                <button type="submit" id="submitBtn" class="btn btn-primary">Yuborish</button>
             </form>
         </div>
     </section>
@@ -218,6 +220,53 @@
         <p>&copy; 2026 HAYBAT club. Barcha huquqlar himoyalangan.</p>
         <p>Denov tumani, Surxondaryo · <a href="tel:+998902953139">+998 90 295 31 39</a> · <a href="https://t.me/Natija_app" target="_blank" rel="noopener">Telegram: @Natija_app</a></p>
     </footer>
+
+    <!-- Telegram Bot JavaScript Kodi -->
+    <script>
+        const BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE'; // BotFather bergan token
+        const CHAT_ID = 'YOUR_CHAT_ID_HERE';     // userinfobot bergan ID
+
+        document.getElementById('tgForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const submitBtn = document.getElementById('submitBtn');
+
+            submitBtn.innerText = 'Yuborilmoqda...';
+            submitBtn.disabled = true;
+
+            const text = `🥊 <b>HAYBAT CLUB - YANGI ARIZA!</b>\n\n👤 <b>Ismi:</b> ${name}\n📞 <b>Tel:</b> ${phone}`;
+
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: text,
+                    parse_mode: 'HTML'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    alert('Arizangiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog\'lanamiz.');
+                    document.getElementById('tgForm').reset();
+                } else {
+                    alert('Xatolik yuz berdi. Iltimos qaytadan urinib ko\'ring.');
+                }
+            })
+            .catch(error => {
+                alert('Tarmoq xatosi! Internetingizni tekshiring.');
+            })
+            .finally(() => {
+                submitBtn.innerText = 'Yuborish';
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
 
 </body>
 </html>
