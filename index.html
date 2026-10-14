@@ -10,8 +10,74 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,800&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Yangi funksiyalar uchun qo'shimcha stillar */
+        .floating-tg {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0088cc;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease;
+        }
+        .floating-tg:hover {
+            transform: scale(1.05);
+        }
+        .promo-banner {
+            background: linear-gradient(45deg, #ff0000, #b30000);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+        }
+        .timer {
+            font-size: 1.2rem;
+            color: #ffeb3b;
+            margin-top: 5px;
+        }
+        .calc-box {
+            background: #111;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 600px;
+            border: 1px solid #333;
+        }
+        .calc-box select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #222;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 5px;
+        }
+        .map-container {
+            width: 100%;
+            height: 300px;
+            margin-top: 1.5rem;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Aksiya Taymeri (Tepa qismida) -->
+    <div class="promo-banner">
+        🔥 MAXSUS AKSIYA: Shu hafta oxirigacha a'zo bo'ling va chegirmaga ega bo'ling!
+        <div class="timer" id="countdown">Aksiya tugashiga: -- kun --:--:-- qoldi</div>
+    </div>
 
     <!-- Header / Navigatsiya -->
     <header>
@@ -19,7 +85,7 @@
         <nav aria-label="Asosiy menyu">
             <a href="#about">Klub haqida</a>
             <a href="#sports">Sport turlari</a>
-            <a href="#services">Dasturlar</a>
+            <a href="#calculator">Kalkulyator</a>
             <a href="#pricing">Tariflar</a>
             <a href="#contact" class="nav-btn">A'zo bo'lish</a>
         </nav>
@@ -43,12 +109,6 @@
             <h2>Nima uchun <span>HAYBAT</span>?</h2>
             <p class="lead">HAYBAT club - Surxondaryo viloyati, Denov tumanidagi jang san'atlari va funksional mashg'ulotlar klubi. Bu yerda siz MMA, kikboksing va krossfit bilan shug'ullanasiz. Har bir sportchi uchun alohida e'tibor va professional yondashuv kafolatlanadi.</p>
             <p class="manager">Klub boshqaruvchisi: <strong>Muhammad Yusuf</strong></p>
-            <ul class="features">
-                <li><h3>Jang texnikasi</h3><p>To'g'ri turish, zarba, himoya va kurash asoslaridan boshlab o'rgatamiz.</p></li>
-                <li><h3>Tajribali murabbiylar</h3><p>Mashg'ulotni sizning darajangiz va maqsadingizga moslashtirib beradi.</p></li>
-                <li><h3>Kuch va chidamlilik</h3><p>Jang va krossfit uchun zarur jismoniy tayyorgarlik har mashg'ulotda.</p></li>
-                <li><h3>Jamoa ruhi</h3><p>Birga mashq qilish va bir-birini qo'llab-quvvatlash muhiti.</p></li>
-            </ul>
         </div>
     </section>
 
@@ -61,133 +121,53 @@
                     <div style="font-size: 4.5rem; margin-bottom: 1rem;">🥋</div>
                     <div class="sport-body" style="border-top: none; padding: 0; text-align: left;">
                         <h3>MMA</h3>
-                        <p>Aralash jang san'ati: zarba berish, kurash va yerdagi jang texnikasi. Kuch, tezlik va intizomni birga rivojlantiradi.</p>
+                        <p>Aralash jang san'ati: zarba berish, kurash va yerdagi jang texnikasi.</p>
                     </div>
                 </article>
                 <article class="sport" style="text-align: center; padding: 2.5rem 1.5rem;">
                     <div style="font-size: 4.5rem; margin-bottom: 1rem;">🥊</div>
                     <div class="sport-body" style="border-top: none; padding: 0; text-align: left;">
                         <h3>Kikboksing</h3>
-                        <p>Qo'l va oyoq zarbalari, himoya va harakat texnikasi. Chidamlilik va reaksiya tezligini oshiradi.</p>
+                        <p>Qo'l va oyoq zarbalari, himoya va harakat texnikasi.</p>
                     </div>
                 </article>
                 <article class="sport" style="text-align: center; padding: 2.5rem 1.5rem;">
                     <div style="font-size: 4.5rem; margin-bottom: 1rem;">🏋️‍♂️</div>
                     <div class="sport-body" style="border-top: none; padding: 0; text-align: left;">
                         <h3>Krossfit</h3>
-                        <p>Kuch, kardio va gimnastika mashqlarini birlashtirgan yuqori intensivlikdagi mashg'ulot.</p>
+                        <p>Kuch, kardio va gimnastika mashqlarini birlashtirgan intensiv mashg'ulot.</p>
                     </div>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- Dasturlar -->
-    <section id="services" class="services">
-        <div class="wrap">
-            <h2>Mashg'ulot dasturlari</h2>
-            <div class="cards-container">
-                <div class="card">
-                    <h3>Jang texnikasi</h3>
-                    <p>Zarbalar, himoya, masofa va harakat. Texnika asoslaridan murakkab kombinatsiyalargacha.</p>
-                </div>
-                <div class="card">
-                    <h3>Sparring</h3>
-                    <p>Murabbiy nazorati ostida juftlikda mashq. O'rgangan texnikangizni amalda sinab ko'rasiz.</p>
-                </div>
-                <div class="card">
-                    <h3>Krossfit kun mashqi</h3>
-                    <p>Har kuni yangi mashqlar majmuasi. Darajangizga qarab og'irlik va takrorlar moslanadi.</p>
-                </div>
-                <div class="card">
-                    <h3>Kuch va chidamlilik</h3>
-                    <p>Jang va krossfit uchun zarur kondisioner: yugurish, arqon, og'irlik bilan ishlash.</p>
-                </div>
-                <div class="card">
-                    <h3>Shaxsiy murabbiy</h3>
-                    <p>Siz uchun maxsus mashg'ulot va ovqatlanish rejasini tuzib beramiz.</p>
-                </div>
-                <div class="card">
-                    <h3>Cho'zilish va tiklanish</h3>
-                    <p>Mashqdan keyin mushaklarni tinchlantirish va jarohatlardan saqlanish.</p>
-                </div>
-            </div>
+    <!-- Interaktiv A'zolik Kalkulyatori -->
+    <section id="calculator" style="padding: 3rem 1rem; text-align: center;">
+        <h2>A'zolik <span>Hisoblagichi</span></h2>
+        <p>Sport turi va muddatini tanlang, jami narxni hisoblang:</p>
+        <div class="calc-box">
+            <label>Sport turini tanlang:</label>
+            <select id="sportSelect" onchange="calculatePrice()">
+                <option value="300000">MMA (300 000 so'm/oy)</option>
+                <option value="250000">Kikboksing (250 000 so'm/oy)</option>
+                <option value="250000">Krossfit (250 000 so'm/oy)</option>
+                <option value="500000">Hammasi birga (500 000 so'm/oy)</option>
+            </select>
+
+            <label>Muddati (oy):</label>
+            <select id="monthSelect" onchange="calculatePrice()">
+                <option value="1">1 Oy</option>
+                <option value="3">3 Oy (5% Chegirma)</option>
+                <option value="6">6 Oy (10% Chegirma)</option>
+                <option value="12">12 Oy (20% Chegirma)</option>
+            </select>
+
+            <h3 style="margin-top: 15px;">Jami narx: <span id="totalPrice" style="color: #ff0000;">300 000</span> so'm</h3>
         </div>
     </section>
 
-    <!-- Tariflar -->
-    <section id="pricing" class="pricing">
-        <div class="wrap">
-            <h2>Tariflar</h2>
-            <div class="cards-container">
-                <div class="plan">
-                    <h3>MMA</h3>
-                    <p class="price">300 000 so'm <span>/ oy</span></p>
-                    <ul>
-                        <li>MMA guruh mashg'ulotlari</li>
-                        <li>Murabbiy nazorati</li>
-                        <li>Sparring</li>
-                    </ul>
-                </div>
-                <div class="plan">
-                    <h3>Kikboksing</h3>
-                    <p class="price">250 000 so'm <span>/ oy</span></p>
-                    <ul>
-                        <li>Kikboksing guruh mashg'ulotlari</li>
-                        <li>Murabbiy nazorati</li>
-                        <li>Sparring</li>
-                    </ul>
-                </div>
-                <div class="plan">
-                    <h3>Krossfit</h3>
-                    <p class="price">250 000 so'm <span>/ oy</span></p>
-                    <ul>
-                        <li>Krossfit kun mashqlari</li>
-                        <li>Murabbiy nazorati</li>
-                        <li>Kuch va chidamlilik</li>
-                    </ul>
-                </div>
-                <div class="plan plan-main">
-                    <h3>Hammasi birga</h3>
-                    <p class="price">500 000 so'm <span>/ oy</span></p>
-                    <ul>
-                        <li>MMA, kikboksing va krossfit</li>
-                        <li>Barcha guruh mashg'ulotlari</li>
-                        <li>Shaxsiy murabbiy maslahati</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Ko'p so'raladigan savollar -->
-    <section id="faq" class="faq">
-        <div class="wrap">
-            <h2>Ko'p so'raladigan savollar</h2>
-            <details>
-                <summary>Qanday sport turlari bor?</summary>
-                <p>Klubimizda MMA, kikboksing va krossfit yo'nalishlari bor. Alohida yo'nalishga yoki hammasiga birga a'zo bo'lishingiz mumkin.</p>
-            </details>
-            <details>
-                <summary>Hech qachon jang sporti bilan shug'ullanmaganman. Boshlay olamanmi?</summary>
-                <p>Ha. Murabbiylarimiz mashg'ulotni sizning hozirgi darajangizga moslashtirib, qadam-baqadam olib boradi.</p>
-            </details>
-            <details>
-                <summary>Mashg'ulotga nima kiyib kelaman?</summary>
-                <p>Qulay sport kiyimi yetarli. Qo'lqop va boshqa himoya vositalari haqida murabbiy maslahat beradi.</p>
-            </details>
-            <details>
-                <summary>Qanday qilib a'zo bo'laman?</summary>
-                <p>Sahifadagi formani to'ldiring, +998 93 869 60 04 raqamiga qo'ng'iroq qiling yoki Telegramda @ISLOMBEKPROGRAMMER ga yozing. Biz mos tarifni tanlashga yordam beramiz.</p>
-            </details>
-            <details>
-                <summary>Klub qayerda joylashgan?</summary>
-                <p>Surxondaryo viloyati, Denov tumanida. Aniq manzil uchun klub boshqaruvchisi Muhammad Yusufga qo'ng'iroq qiling.</p>
-            </details>
-        </div>
-    </section>
-
-    <!-- Bog'lanish -->
+    <!-- Bog'lanish va Xarita -->
     <section id="contact" class="contact">
         <div class="wrap contact-grid">
             <div>
@@ -198,39 +178,44 @@
                     <dt>Telefon</dt><dd><a href="tel:+998938696004">+998 93 869 60 04</a></dd>
                     <dt>Telegram</dt><dd><a href="https://t.me/ISLOMBEKPROGRAMMER" target="_blank" rel="noopener">@ISLOMBEKPROGRAMMER</a></dd>
                     <dt>Manzil</dt><dd>Surxondaryo viloyati, Denov tumani</dd>
-                    <dt>Ish vaqti</dt><dd>Dushanba – Shanba: 06:00 – 22:00<br>Yakshanba: 08:00 – 20:00</dd>
                 </dl>
-                <div class="actions">
-                    <a href="https://t.me/ISLOMBEKPROGRAMMER" target="_blank" rel="noopener" class="btn btn-primary">Telegramda yozish</a>
-                    <a href="tel:+998938696004" class="btn btn-secondary">Qo'ng'iroq qilish</a>
+                
+                <!-- Google Maps Xaritasi -->
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100000!2d67.89!3d38.27!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38b431e21b2b8db1%3A0x868b4f1b!2sDenov%2C%20Surxondaryo!5e0!3m2!1suz!2s!4v1680000000000!5m2!1suz!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
             
             <!-- Telegram Bot ulanadigan forma -->
             <form class="contact-form" id="tgForm">
-                <input type="text" name="name" id="name" placeholder="Ismingiz" aria-label="Ismingiz" autocomplete="name" required>
-                <input type="tel" name="phone" id="phone" placeholder="Telefon raqamingiz" aria-label="Telefon raqamingiz" autocomplete="tel" required>
+                <input type="text" name="name" id="name" placeholder="Ismingiz" required>
+                <input type="tel" name="phone" id="phone" placeholder="Telefon raqamingiz" required>
                 <button type="submit" id="submitBtn" class="btn btn-primary">Yuborish</button>
             </form>
         </div>
     </section>
 
+    <!-- Suzuvchi Telegram Tugmasi -->
+    <a href="https://t.me/ISLOMBEKPROGRAMMER" target="_blank" class="floating-tg">
+        ✈️ Telegramda yozish
+    </a>
+
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 HAYBAT club. Barcha huquqlar himoyalangan.</p>
-        <p>Denov tumani, Surxondaryo · <a href="tel:+998938696004">+998 93 869 60 04</a> · <a href="https://t.me/ISLOMBEKPROGRAMMER" target="_blank" rel="noopener">Telegram: @ISLOMBEKPROGRAMMER</a></p>
     </footer>
 
-    <!-- Telegram Bot JavaScript Kodi -->
+    <!-- JavaScript Kodi -->
     <script>
+        // Telegram Bot
         const BOT_TOKEN = '8886541974:AAHg-J-auCww0D8x98d53EwdY0tTLwHn6Vw'; 
         const CHAT_ID = '8632244174';     
 
+        // 1. Forma yuborish
         const tgForm = document.getElementById('tgForm');
         if (tgForm) {
             tgForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-
                 const name = document.getElementById('name').value;
                 const phone = document.getElementById('phone').value;
                 const submitBtn = document.getElementById('submitBtn');
@@ -242,34 +227,53 @@
 
                 fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: text,
-                        parse_mode: 'HTML'
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: CHAT_ID, text: text, parse_mode: 'HTML' })
                 })
-                .then(response => response.json())
+                .then(res => res.json())
                 .then(data => {
                     if (data.ok) {
-                        alert('Arizangiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog\'lanamiz.');
+                        alert('Arizangiz muvaffaqiyatli yuborildi!');
                         tgForm.reset();
                     } else {
-                        alert('Xatolik yuz berdi: ' + data.description);
+                        alert('Xatolik: ' + data.description);
                     }
                 })
-                .catch(error => {
-                    alert('Tarmoq xatosi yuz berdi. Qaytadan urinib ko\'ring.');
-                    console.error(error);
-                })
+                .catch(err => alert('Tarmoq xatosi!'))
                 .finally(() => {
                     submitBtn.innerText = 'Yuborish';
                     submitBtn.disabled = false;
                 });
             });
         }
+
+        // 2. Kalkulyator
+        function calculatePrice() {
+            const basePrice = parseInt(document.getElementById('sportSelect').value);
+            const months = parseInt(document.getElementById('monthSelect').value);
+            let discount = 0;
+
+            if (months === 3) discount = 0.05;
+            else if (months === 6) discount = 0.10;
+            else if (months === 12) discount = 0.20;
+
+            const total = (basePrice * months) * (1 - discount);
+            document.getElementById('totalPrice').innerText = total.toLocaleString();
+        }
+
+        // 3. Aksiya Taymeri
+        const targetDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000); // 3 kunlik taymer
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = `Aksiya tugashiga: ${days} kun ${hours}:${minutes}:${seconds} qoldi`;
+        }, 1000);
     </script>
 
 </body>
