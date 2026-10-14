@@ -223,7 +223,8 @@
 
     <!-- Telegram Bot JavaScript Kodi -->
     <script>
-        const BOT_TOKEN = '8886541974:AAHg-J-auCww0D8x98d53EwdY0tTLwHn6Vw'; 
+        // BotFather bergan yangi to'liq tokenni shu yerga qo'ying:
+        const BOT_TOKEN = 'BOT_TOKEN_SHU_YERGA'; 
         const CHAT_ID = '8632244174';     
 
         const tgForm = document.getElementById('tgForm');
@@ -261,7 +262,7 @@
                     }
                 })
                 .catch(error => {
-                    alert('Xatolik yuz berdi. Iltimos qaytadan urinib ko\'ring.');
+                    alert('Tarmoq xatosi yoki Bot Token noto\'g'ri kiritilgan!');
                     console.error(error);
                 })
                 .finally(() => {
