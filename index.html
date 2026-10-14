@@ -12,7 +12,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,800&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Yangi funksiyalar uchun qo'shimcha stillar */
+        /* Dark/Light mode uchun o'zgaruvchilar */
+        :root {
+            --bg-color: #0b0b0b;
+            --card-bg: #141414;
+            --text-color: #ffffff;
+            --accent-color: #ff0000;
+            --border-color: #222222;
+        }
+
+        body.light-theme {
+            --bg-color: #f4f4f9;
+            --card-bg: #ffffff;
+            --text-color: #111111;
+            --border-color: #dddddd;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .theme-toggle-btn {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
         .floating-tg {
             position: fixed;
             bottom: 20px;
@@ -23,7 +54,7 @@
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -33,35 +64,62 @@
         .floating-tg:hover {
             transform: scale(1.05);
         }
+
         .promo-banner {
             background: linear-gradient(45deg, #ff0000, #b30000);
             color: white;
             text-align: center;
-            padding: 15px;
+            padding: 12px;
             font-weight: bold;
         }
         .timer {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #ffeb3b;
-            margin-top: 5px;
+            margin-top: 4px;
         }
+
         .calc-box {
-            background: #111;
+            background: var(--card-bg);
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 12px;
             margin: 2rem auto;
             max-width: 600px;
-            border: 1px solid #333;
+            border: 1px solid var(--border-color);
         }
-        .calc-box select {
+        .calc-box select, .calc-box input {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
-            background: #222;
-            color: #fff;
-            border: 1px solid #444;
-            border-radius: 5px;
+            margin: 8px 0;
+            background: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
         }
+
+        .coaches-grid, .gallery-grid, .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 2rem;
+        }
+        .coach-card, .review-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .gallery-item {
+            background: var(--card-bg);
+            height: 200px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border: 1px solid var(--border-color);
+        }
+
         .map-container {
             width: 100%;
             height: 300px;
@@ -73,9 +131,9 @@
 </head>
 <body>
 
-    <!-- Aksiya Taymeri (Tepa qismida) -->
+    <!-- Aksiya Taymeri -->
     <div class="promo-banner">
-        🔥 MAXSUS AKSIYA: Shu hafta oxirigacha a'zo bo'ling va chegirmaga ega bo'ling!
+        🔥 MAXSUS AKSIYA: Shu hafta oxirigacha a'zo bo'ling va 15% chegirmaga ega bo'ling!
         <div class="timer" id="countdown">Aksiya tugashiga: -- kun --:--:-- qoldi</div>
     </div>
 
@@ -86,8 +144,10 @@
             <a href="#about">Klub haqida</a>
             <a href="#sports">Sport turlari</a>
             <a href="#calculator">Kalkulyator</a>
-            <a href="#pricing">Tariflar</a>
+            <a href="#coaches">Murabbiylar</a>
+            <a href="#gallery">Galereya</a>
             <a href="#contact" class="nav-btn">A'zo bo'lish</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()">☀️/🌙</button>
         </nav>
     </header>
 
@@ -107,7 +167,7 @@
     <section id="about" class="about">
         <div class="wrap">
             <h2>Nima uchun <span>HAYBAT</span>?</h2>
-            <p class="lead">HAYBAT club - Surxondaryo viloyati, Denov tumanidagi jang san'atlari va funksional mashg'ulotlar klubi. Bu yerda siz MMA, kikboksing va krossfit bilan shug'ullanasiz. Har bir sportchi uchun alohida e'tibor va professional yondashuv kafolatlanadi.</p>
+            <p class="lead">HAYBAT club - Surxondaryo viloyati, Denov tumanidagi jang san'atlari va funksional mashg'ulotlar klubi.</p>
             <p class="manager">Klub boshqaruvchisi: <strong>Muhammad Yusuf</strong></p>
         </div>
     </section>
@@ -142,7 +202,7 @@
         </div>
     </section>
 
-    <!-- Interaktiv A'zolik Kalkulyatori -->
+    <!-- Narx Kalkulyatori -->
     <section id="calculator" style="padding: 3rem 1rem; text-align: center;">
         <h2>A'zolik <span>Hisoblagichi</span></h2>
         <p>Sport turi va muddatini tanlang, jami narxni hisoblang:</p>
@@ -167,6 +227,66 @@
         </div>
     </section>
 
+    <!-- Vazn va Bo'y (BMI) Kalkulyatori -->
+    <section id="bmi" style="padding: 3rem 1rem; text-align: center;">
+        <h2>Sizga Qaysi Sport Mos? <span>(BMI Test)</span></h2>
+        <div class="calc-box">
+            <input type="number" id="weight" placeholder="Vazningiz (kg)">
+            <input type="number" id="height" placeholder="Bo'yingiz (cm)">
+            <button class="btn btn-primary" onclick="calculateBMI()" style="margin-top: 10px; width: 100%;">Tahlil qilish</button>
+            <h4 id="bmiResult" style="margin-top: 15px; color: #ff0000;"></h4>
+        </div>
+    </section>
+
+    <!-- Murabbiylarimiz (Faqat matnli) -->
+    <section id="coaches" style="padding: 3rem 1rem;">
+        <div class="wrap">
+            <h2 style="text-align: center;">Tajribali <span>Murabbiylarimiz</span></h2>
+            <div class="coaches-grid">
+                <div class="coach-card">
+                    <h3>Muhammad Yusuf</h3>
+                    <p style="color: var(--accent-color); font-weight: bold; margin: 5px 0;">Bosh Murabbiy</p>
+                    <p>MMA va Kikboksing bo'yicha professional yo'nalish hamda texnikalarni o'rgatadi.</p>
+                </div>
+                <div class="coach-card">
+                    <h3>Islombek</h3>
+                    <p style="color: var(--accent-color); font-weight: bold; margin: 5px 0;">Krossfit Murabbiyi</p>
+                    <p>Jismoniy tayyorgarlik, kuch va chidamlilik mashg'ulotlari mutaxassisi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Foto Galereya -->
+    <section id="gallery" style="padding: 3rem 1rem;">
+        <div class="wrap">
+            <h2 style="text-align: center;">Zal va Mashg'ulotlardan <span>Foto-kadrlar</span></h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">🥋</div>
+                <div class="gallery-item">🥊</div>
+                <div class="gallery-item">🏋️‍♂️</div>
+                <div class="gallery-item">🏆</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mijozlar Fikrlari -->
+    <section id="reviews" style="padding: 3rem 1rem;">
+        <div class="wrap">
+            <h2 style="text-align: center;">Sportchilarimiz <span>Fikrlari</span></h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <p>"HAYBAT club'da shug'ullanish boshlaganimdan beri jismoniy holatim keskin o'zgardi. Muhit ajoyib!"</p>
+                    <h4 style="margin-top: 10px; color: var(--accent-color);">- Sardor M.</h4>
+                </div>
+                <div class="review-card">
+                    <p>"Professional yondashuv va zo'r murabbiylar. Barchaga tavsiya qilaman!"</p>
+                    <h4 style="margin-top: 10px; color: var(--accent-color);">- Diyorbek K.</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Bog'lanish va Xarita -->
     <section id="contact" class="contact">
         <div class="wrap contact-grid">
@@ -177,16 +297,16 @@
                     <dt>Boshqaruvchi</dt><dd>Muhammad Yusuf</dd>
                     <dt>Telefon</dt><dd><a href="tel:+998938696004">+998 93 869 60 04</a></dd>
                     <dt>Telegram</dt><dd><a href="https://t.me/ISLOMBEKPROGRAMMER" target="_blank" rel="noopener">@ISLOMBEKPROGRAMMER</a></dd>
-                    <dt>Manzil</dt><dd>Surxondaryo viloyati, Denov tumani</dd>
+                    <dt>Manzil</dt><dd>Surxondaryo viloyati, Denov tumani (Zo'r Market yonida)</dd>
                 </dl>
                 
-                <!-- Google Maps Xaritasi -->
+                <!-- Google Maps Xaritasi (Zo'r Market) -->
                 <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100000!2d67.89!3d38.27!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38b431e21b2b8db1%3A0x868b4f1b!2sDenov%2C%20Surxondaryo!5e0!3m2!1suz!2s!4v1680000000000!5m2!1suz!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d442.30966351614006!2d67.88043966778787!3d38.28046728445802!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38b511f4cc61a38d%3A0xb1c02a2d58586c1c!2sZo'r%20Market!5e1!3m2!1sen!2s!4v1792017420385!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                 </div>
             </div>
             
-            <!-- Telegram Bot ulanadigan forma -->
+            <!-- Telegram Bot Formasi -->
             <form class="contact-form" id="tgForm">
                 <input type="text" name="name" id="name" placeholder="Ismingiz" required>
                 <input type="tel" name="phone" id="phone" placeholder="Telefon raqamingiz" required>
@@ -207,11 +327,16 @@
 
     <!-- JavaScript Kodi -->
     <script>
-        // Telegram Bot
+        // Telegram Bot Credentials
         const BOT_TOKEN = '8886541974:AAHg-J-auCww0D8x98d53EwdY0tTLwHn6Vw'; 
         const CHAT_ID = '8632244174';     
 
-        // 1. Forma yuborish
+        // 1. Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+        }
+
+        // 2. Telegram Form Submission
         const tgForm = document.getElementById('tgForm');
         if (tgForm) {
             tgForm.addEventListener('submit', function(e) {
@@ -247,7 +372,7 @@
             });
         }
 
-        // 2. Kalkulyator
+        // 3. Narx Kalkulyatori
         function calculatePrice() {
             const basePrice = parseInt(document.getElementById('sportSelect').value);
             const months = parseInt(document.getElementById('monthSelect').value);
@@ -261,8 +386,26 @@
             document.getElementById('totalPrice').innerText = total.toLocaleString();
         }
 
-        // 3. Aksiya Taymeri
-        const targetDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000); // 3 kunlik taymer
+        // 4. BMI Kalkulyatori
+        function calculateBMI() {
+            const w = parseFloat(document.getElementById('weight').value);
+            const h = parseFloat(document.getElementById('height').value) / 100;
+            
+            if (w > 0 && h > 0) {
+                const bmi = (w / (h * h)).toFixed(1);
+                let rec = "";
+                if (bmi < 18.5) rec = "Siz ozg'insiz. Krossfit va to'g'ri ovqatlanish tavsiya etiladi!";
+                else if (bmi < 25) rec = "Vazningiz me'yorda! MMA va Kikboksing juda mos tushadi.";
+                else rec = "Ortiqcha vazn mavjud. Krossfit va Kikboksing orqali tezda forma olasiz!";
+
+                document.getElementById('bmiResult').innerText = `BMI ko'rsatkichingiz: ${bmi}. ${rec}`;
+            } else {
+                alert("Iltimos, vazn va bo'yingizni to'g'ri kiriting!");
+            }
+        }
+
+        // 5. Aksiya Taymeri
+        const targetDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000);
         setInterval(function() {
             const now = new Date().getTime();
             const distance = targetDate - now;
