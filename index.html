@@ -223,49 +223,53 @@
 
     <!-- Telegram Bot JavaScript Kodi -->
     <script>
-        const BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE'; // BotFather bergan token
-        const CHAT_ID = 'YOUR_CHAT_ID_HERE';     // userinfobot bergan ID
+        const BOT_TOKEN = '8886541974:AAHg-J-auCww0D8x98d53EwdY0tTLwHn6Vw'; 
+        const CHAT_ID = '8632244174';     
 
-        document.getElementById('tgForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        const tgForm = document.getElementById('tgForm');
+        if (tgForm) {
+            tgForm.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const submitBtn = document.getElementById('submitBtn');
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const submitBtn = document.getElementById('submitBtn');
 
-            submitBtn.innerText = 'Yuborilmoqda...';
-            submitBtn.disabled = true;
+                submitBtn.innerText = 'Yuborilmoqda...';
+                submitBtn.disabled = true;
 
-            const text = `🥊 <b>HAYBAT CLUB - YANGI ARIZA!</b>\n\n👤 <b>Ismi:</b> ${name}\n📞 <b>Tel:</b> ${phone}`;
+                const text = `🥊 <b>HAYBAT CLUB - YANGI ARIZA!</b>\n\n👤 <b>Ismi:</b> ${name}\n📞 <b>Tel:</b> ${phone}`;
 
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: text,
-                    parse_mode: 'HTML'
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: text,
+                        parse_mode: 'HTML'
+                    })
                 })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.ok) {
-                    alert('Arizangiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog\'lanamiz.');
-                    document.getElementById('tgForm').reset();
-                } else {
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        alert('Arizangiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog\'lanamiz.');
+                        tgForm.reset();
+                    } else {
+                        alert('Xatolik yuz berdi: ' + data.description);
+                    }
+                })
+                .catch(error => {
                     alert('Xatolik yuz berdi. Iltimos qaytadan urinib ko\'ring.');
-                }
-            })
-            .catch(error => {
-                alert('Tarmoq xatosi! Internetingizni tekshiring.');
-            })
-            .finally(() => {
-                submitBtn.innerText = 'Yuborish';
-                submitBtn.disabled = false;
+                    console.error(error);
+                })
+                .finally(() => {
+                    submitBtn.innerText = 'Yuborish';
+                    submitBtn.disabled = false;
+                });
             });
-        });
+        }
     </script>
 
 </body>
