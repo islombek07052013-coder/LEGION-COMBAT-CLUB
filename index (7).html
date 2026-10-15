@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HAYBAT club - Surxondaryo, Denov tumanida MMA, kikboksing va krossfit bo'yicha mashg'ulotlar.">
+    <title>HAYBAT club - MMA, Kikboksing va Krossfit klubi | Denov</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,800&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="promo">🔥 Shu hafta a'zo bo'ling va 15% chegirma oling. Tugashiga: <b id="countdown">--</b></div>
+
+    <header>
+        <a href="#home" class="logo">HAYBAT <span>CLUB</span></a>
+        <nav aria-label="Asosiy menyu">
+            <a href="#about">Klub haqida</a>
+            <a href="#sports">Sport turlari</a>
+            <a href="#tools">Narxlar</a>
+            <a href="#coaches">Murabbiylar</a>
+            <a href="#faq">Savollar</a>
+            <a href="#contact" class="btn btn-primary btn-sm">A'zo bo'lish</a>
+            <button class="theme-toggle-btn" id="themeBtn" type="button" aria-label="Kun va tun rejimini almashtirish">◐</button>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="stickers" aria-hidden="true"><span>🥊</span><span>🥋</span><span>🏋️‍♂️</span></div>
+        <div class="hero-content">
+            <p class="status">📅 <b>Bugun:</b> <span id="todayStatus">tekshirilmoqda...</span></p>
+            <h1>HAYBATLI <br><span>KUCHLI BO'LING</span></h1>
+            <p>MMA, kikboksing va krossfit bo'yicha tajribali murabbiylar bilan mashq qiling. Kuchli tana, tez reaksiya va temir intizom shu yerda shakllanadi.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">A'zo bo'lish</a>
+                <a href="#sports" class="btn btn-secondary">Sport turlari</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="wrap">
+            <h2>Nima uchun HAYBAT?</h2>
+            <p class="lead">HAYBAT club - Surxondaryo viloyati, Denov tumanidagi jang san'atlari va funksional mashg'ulotlar klubi.</p>
+            <p class="manager">Klub boshqaruvchisi: <strong>Muhammad Yusuf</strong></p>
+        </div>
+    </section>
+
+    <section id="sports" class="sports">
+        <div class="wrap">
+            <h2>Sport turlari</h2>
+            <div class="bento">
+                <article class="sport"><span class="sticker" aria-hidden="true">🥋</span><h3>MMA</h3><p>Aralash jang san'ati: zarba berish, kurash va yerdagi jang texnikasi.</p></article>
+                <article class="sport"><span class="sticker" aria-hidden="true">🥊</span><h3>Kikboksing</h3><p>Qo'l va oyoq zarbalari, himoya va harakat texnikasi.</p></article>
+                <article class="sport"><span class="sticker" aria-hidden="true">🏋️‍♂️</span><h3>Krossfit</h3><p>Kuch, kardio va gimnastika mashqlarini birlashtirgan intensiv mashg'ulot.</p></article>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools" class="tools">
+        <div class="wrap">
+            <h2>Narx va tanlov</h2>
+            <div class="tools-grid">
+                <div class="calc-box">
+                    <h3>A'zolik narxi</h3>
+                    <label for="sportSelect">Sport turi</label>
+                    <select id="sportSelect">
+                        <option value="300000">MMA (300 000 so'm/oy)</option>
+                        <option value="250000">Kikboksing (250 000 so'm/oy)</option>
+                        <option value="250000">Krossfit (250 000 so'm/oy)</option>
+                        <option value="500000">Hammasi birga (500 000 so'm/oy)</option>
+                    </select>
+                    <label for="monthSelect">Muddati</label>
+                    <select id="monthSelect">
+                        <option value="1">1 oy</option>
+                        <option value="3">3 oy (5% chegirma)</option>
+                        <option value="6">6 oy (10% chegirma)</option>
+                        <option value="12">12 oy (20% chegirma)</option>
+                    </select>
+                    <p class="out"><span id="totalPrice">300 000</span> <small>so'm jami</small></p>
+                </div>
+                <div class="calc-box">
+                    <h3>Sizga qaysi sport mos?</h3>
+                    <label for="weight">Vazningiz (kg)</label>
+                    <input type="number" id="weight" min="20" max="300" inputmode="decimal">
+                    <label for="height">Bo'yingiz (sm)</label>
+                    <input type="number" id="height" min="100" max="250" inputmode="decimal">
+                    <button class="btn btn-primary" id="bmiBtn" type="button">Tahlil qilish</button>
+                    <p id="bmiResult" aria-live="polite"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="coaches">
+        <div class="wrap">
+            <h2>Murabbiylarimiz</h2>
+            <div class="cards-container">
+                <div class="coach-card">
+                    <div class="mono" aria-hidden="true">M</div>
+                    <div><h3>Muhammad Yusuf</h3><p class="role">Bosh murabbiy</p><p>MMA va kikboksing bo'yicha professional yo'nalish hamda texnikalarni o'rgatadi.</p></div>
+                </div>
+                <div class="coach-card">
+                    <div class="mono" aria-hidden="true">I</div>
+                    <div><h3>Islombek</h3><p class="role">Krossfit murabbiyi</p><p>Jismoniy tayyorgarlik, kuch va chidamlilik mashg'ulotlari mutaxassisi.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <div class="wrap">
+            <h2>Mashg'ulotlar</h2>
+            <div class="gallery-grid" aria-hidden="true">
+                <div class="gallery-item">🥋</div><div class="gallery-item">🥊</div><div class="gallery-item">🏋️‍♂️</div><div class="gallery-item">🏆</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <div class="wrap">
+            <h2>Ko'p so'raladigan savollar</h2>
+            <details><summary>Mashg'ulotlarga yosh chegarasi bormi?</summary><p>Klubimizda har qanday yoshdagi sportchilar uchun maxsus guruhlar mavjud.</p></details>
+            <details><summary>Birinchi mashg'ulot bepulmi?</summary><p>Ha, birinchi tanishuv mashg'uloti mutlaqo bepul.</p></details>
+            <details><summary>O'zim bilan nima olib kelishim kerak?</summary><p>Qulay sport kiyimi, krossovka va suv idishi yetarli.</p></details>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews">
+        <div class="wrap">
+            <h2>Sportchilar fikrlari</h2>
+            <div class="review-grid">
+                <blockquote>HAYBAT club'da shug'ullanishni boshlaganimdan beri jismoniy holatim keskin o'zgardi. Muhit ajoyib!<cite>Sardor M.</cite></blockquote>
+                <blockquote>Professional yondashuv va zo'r murabbiylar. Barchaga tavsiya qilaman!<cite>Diyorbek K.</cite></blockquote>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="wrap contact-grid">
+            <div>
+                <h2>Biz bilan bog'laning</h2>
+                <p>A'zo bo'lish uchun ariza qoldiring yoki Telegramda yozing.</p>
+                <dl class="info">
+                    <dt>Boshqaruvchi</dt><dd>Muhammad Yusuf</dd>
+                    <dt>Telefon</dt><dd><a href="tel:+998938696004">+998 93 869 60 04</a></dd>
+                    <dt>Telegram</dt><dd><a href="https://t.me/ISLOMBEKPROGRAMMER" target="_blank" rel="noopener">@ISLOMBEKPROGRAMMER</a></dd>
+                    <dt>Manzil</dt><dd>Surxondaryo viloyati, Denov tumani (Zo'r Market yonida)</dd>
+                </dl>
+                <div class="map-container">
+                    <iframe title="HAYBAT club xaritada" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d442.30966351614006!2d67.88043966778787!3d38.28046728445802!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38b511f4cc61a38d%3A0xb1c02a2d58586c1c!2sZo'r%20Market!5e1!3m2!1sen!2s!4v1792017420385!5m2!1sen!2s" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                </div>
+            </div>
+            <form class="contact-form" id="tgForm">
+                <h3>Ariza qoldirish</h3>
+                <input type="text" id="name" placeholder="Ismingiz" autocomplete="name" required>
+                <input type="tel" id="phone" placeholder="Telefon raqamingiz" autocomplete="tel" required>
+                <button type="submit" id="submitBtn" class="btn btn-primary">Yuborish</button>
+                <p id="formNote" aria-live="polite"></p>
+            </form>
+        </div>
+    </section>
+
+    <a href="https://t.me/ISLOMBEKPROGRAMMER" target="_blank" rel="noopener" class="floating-tg">✈️ Telegramda yozish</a>
+
+    <footer><p>&copy; 2026 HAYBAT club. Barcha huquqlar himoyalangan.</p></footer>
+
+    <script>
+        const $ = id => document.getElementById(id);
+        const pad = n => String(n).padStart(2, '0');
+        const fmt = n => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+        // Telegram bot (token sahifa kodida ochiq turadi)
+        const BOT_TOKEN = '8880718606:AAGQOW-xNHdI8zGS5FeTEkq-9pEaIy5VKOA';
+        const CHAT_ID = '8632244174';
+
+        // Tema
+        try { if (localStorage.getItem('theme') === 'light') document.body.classList.add('light'); } catch (e) {}
+        $('themeBtn').addEventListener('click', () => {
+            const light = document.body.classList.toggle('light');
+            try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {}
+        });
+
+        // Bugungi ish vaqti
+        $('todayStatus').textContent = new Date().getDay() === 0
+            ? 'Yakshanba, ish vaqti 08:00 – 20:00'
+            : 'Ochiq, ish vaqti 06:00 – 22:00';
+
+        // Aksiya taymeri: joriy haftaning yakshanba kuni 23:59 gacha
+        const end = new Date();
+        end.setDate(end.getDate() + (7 - end.getDay()) % 7);
+        end.setHours(23, 59, 59, 0);
+        function tick() {
+            const d = end - Date.now();
+            if (d <= 0) { document.querySelector('.promo').hidden = true; return; }
+            const s = Math.floor(d / 1000);
+            $('countdown').textContent = `${Math.floor(s / 86400)} kun ${pad(Math.floor(s % 86400 / 3600))}:${pad(Math.floor(s % 3600 / 60))}:${pad(s % 60)}`;
+        }
+        tick(); setInterval(tick, 1000);
+
+        // Narx hisoblagich
+        function calculatePrice() {
+            const months = +$('monthSelect').value;
+            const discount = { 3: .05, 6: .10, 12: .20 }[months] || 0;
+            $('totalPrice').textContent = fmt(+$('sportSelect').value * months * (1 - discount));
+        }
+        $('sportSelect').addEventListener('change', calculatePrice);
+        $('monthSelect').addEventListener('change', calculatePrice);
+
+        // BMI
+        $('bmiBtn').addEventListener('click', () => {
+            const w = parseFloat($('weight').value), h = parseFloat($('height').value) / 100;
+            const out = $('bmiResult');
+            if (!(w > 0 && h > 0)) { out.textContent = "Vazn va bo'yingizni to'g'ri kiriting."; return; }
+            const bmi = w / (h * h);
+            const rec = bmi < 18.5 ? "Siz ozg'insiz. Krossfit va to'g'ri ovqatlanish tavsiya etiladi."
+                : bmi < 25 ? "Vazningiz me'yorda. MMA va kikboksing juda mos tushadi."
+                : "Ortiqcha vazn bor. Krossfit va kikboksing orqali forma olasiz.";
+            out.textContent = `BMI: ${bmi.toFixed(1)}. ${rec}`;
+        });
+
+        // Ariza formasi
+        $('tgForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const name = $('name').value.trim(), phone = $('phone').value.trim();
+            const note = $('formNote'), btn = $('submitBtn');
+            btn.disabled = true; btn.textContent = 'Yuborilmoqda...';
+            try {
+                const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: CHAT_ID, text: `🥊 HAYBAT CLUB - YANGI ARIZA!\n\n👤 Ism: ${name}\n📞 Tel: ${phone}` })
+                });
+                const data = await r.json();
+                if (!data.ok) throw new Error(data.description);
+                note.textContent = "Arizangiz yuborildi. Tez orada bog'lanamiz.";
+                e.target.reset();
+            } catch (err) {
+                note.textContent = "Yuborib bo'lmadi. Iltimos, telefon orqali bog'laning.";
+            } finally { btn.disabled = false; btn.textContent = 'Yuborish'; }
+        });
+    </script>
+</body>
+</html>
